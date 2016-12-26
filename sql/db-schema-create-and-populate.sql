@@ -1,5 +1,5 @@
 
--- Database: "complete-typescript-course"
+-- Database: "homestead"
 
 
 -- DROP TABLE "Courses";

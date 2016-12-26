@@ -1,22 +1,19 @@
-import * as ORM from 'Sequelize' // const ORM = require('sequelize')
-import { Sequelize } from 'Sequelize'
+import * as express from 'express'
+import { Application } from 'express'
+import { findAllCourses } from './queries/findAllCourses'
 
-const dbURL = 'postgres://homestead:secret@localhost:5432/homestead'
-const sequelize: Sequelize = new ORM(dbURL)
+const app: Application = express()
 
-const CourseModel = sequelize.define('Course', {
-  description: ORM.STRING,
-  url: ORM.STRING,
-  longDescription: ORM.TEXT,
-  iconUrl: ORM.STRING,
-  courseListIcon: ORM.STRING,
-  seqNo: ORM.INTEGER,
-  comingSoon: ORM.BOOLEAN,
-  isNew: ORM.BOOLEAN,
-  isOngoing: ORM.BOOLEAN
+app.route('/api/courses').get((req, res) => {
+
+  findAllCourses().then(results => {
+    res.status(200).json(results)
+  })
+
+})
+
+app.listen(8090, () => {
+  console.log('The server is running in http://localhost:8090')
 })
 
 
-CourseModel.findAll().then(d => {
-  console.log(d)
-})
