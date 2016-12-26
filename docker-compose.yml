@@ -1,0 +1,12 @@
+PostgreSQL:
+  restart: always
+  image: postgres:alpine
+  ports:
+    - "5432:5432"
+  environment:
+    - DEBUG=false
+    - POSTGRES_PASSWORD=secret
+    - POSTGRES_USER=homestead
+    - POSTGRES_DB=homestead
+  volumes:
+    - ./data:/var/lib/postgresql
